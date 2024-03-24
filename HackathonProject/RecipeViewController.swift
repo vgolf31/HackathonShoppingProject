@@ -69,7 +69,9 @@ class RecipeViewController: UIViewController {
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                 
                 if let hits = json?["hits"] as? [[String: Any]], let firstHit = hits.first {
-                    if let recipe = firstHit["recipe"] as? [String: Any], let ingredientLines = recipe["ingredientLines"] as? [String] {
+                    let recipe = firstHit["recipe"] as? [String: Any]
+                    print(recipe)
+                    if let recipe = firstHit["recipe"] as? [String: Any], let ingredientLines = recipe["ingredientLines"] as? [String], let dishType = recipe["dishType"] as? [String]{
                         // Call completion handler with fetched data
                         completion(ingredientLines)
                     } else {
